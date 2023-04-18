@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
 import 'package:walkmate/view/screens/widgets/custom_app_bar.dart';
+import 'package:walkmate/view/screens/widgets/custom_button.dart';
 
 class HomeScreens extends ConsumerStatefulWidget {
   const HomeScreens({super.key});
@@ -71,44 +72,6 @@ class _HomeScreensState extends ConsumerState<HomeScreens> {
             ),
           )
         ],
-      ),
-    );
-  }
-}
-
-class CustomButtonWidget extends StatelessWidget {
-  const CustomButtonWidget({
-    super.key,
-    required this.size,
-    required this.onPressed,
-    required this.title,
-  });
-
-  final Size size;
-  final String title;
-  final void Function() onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        height: size.height * 0.08,
-        width: size.width,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
-          color: Kconstants.of(context)!.green,
-        ),
-        child: Center(
-          child: Text(
-            title,
-            style: TextStyle(
-              color: Kconstants.of(context)!.offWhite,
-              fontWeight: FontWeight.w600,
-              fontSize: size.width * 0.035,
-            ),
-          ),
-        ),
       ),
     );
   }
