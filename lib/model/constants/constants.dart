@@ -26,6 +26,9 @@ class Kconstants extends InheritedWidget {
     fontWeight: FontWeight.w600,
   );
 
+  final EdgeInsetsGeometry appPading =
+      const EdgeInsets.symmetric(vertical: 32, horizontal: 16);
+
   @override
   bool updateShouldNotify(Kconstants oldWidget) => false;
 }

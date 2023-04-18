@@ -20,13 +20,15 @@ class CustomThemes {
 class ThemeNotifier extends ChangeNotifier {
   //-----Store the theme of our app
   ThemeMode themeMode = ThemeMode.light;
+  bool isOn = true; // set the value with the theme on or off.
 
   //----If theme mode is equal to dark then we return True
   //-----isDarkMode--is the field we will use in our switch
   bool get isDarkMode => themeMode == ThemeMode.dark;
 
   //---implement ToggleTheme function
-  void toggleTheme(bool isOn) {
+  void toggleTheme() {
+    isOn = !isOn;
     themeMode = isOn ? ThemeMode.light : ThemeMode.dark;
 
     notifyListeners();
