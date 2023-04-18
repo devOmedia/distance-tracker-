@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:walkmate/model/constants/constants.dart';
+import 'package:walkmate/view/screens/home_screens.dart';
 
 import 'controller/providers/theme_provider.dart';
 
@@ -28,6 +29,10 @@ class MyApp extends StatelessWidget {
           theme: customThemes.getLightTheme(),
           darkTheme: customThemes.getDarkTheme(),
           themeMode: ref.watch(themeProvider).themeMode,
+          initialRoute: HomeScreens.id,
+          routes: {
+            HomeScreens.id: (context) => const HomeScreens(),
+          },
         );
       },
     );

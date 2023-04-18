@@ -13,7 +13,7 @@ class CustomThemes {
 
   //-------------light THEME SETTINGS
   getLightTheme() => ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Kconstants.of(context)!.offWhite,
       );
 }
 
