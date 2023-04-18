@@ -26,7 +26,10 @@ class _HomeScreensState extends ConsumerState<HomeScreens> {
           //==========================>>> custom app bar
           Padding(
             padding: Kconstants.of(context)!.appPading,
-            child: CustomAppBar(ref: ref),
+            child: CustomAppBar(
+              ref: ref,
+              iconColor: Kconstants.of(context)!.green,
+            ),
           ),
           SizedBox(height: size.height * 0.04),
           Padding(

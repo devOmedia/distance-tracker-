@@ -2,27 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
-import 'package:walkmate/model/constants/constants.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     super.key,
     required this.ref,
+    required this.iconColor,
+    this.themeButton = "Theme.svg",
   });
 
   final WidgetRef ref;
+  final Color iconColor;
+  final String themeButton;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const LogoWidget(),
+        LogoWidget(
+          iconColor: iconColor,
+        ),
         GestureDetector(
           onTap: () {
             ref.read(themeProvider).toggleTheme();
           },
-          child: SvgPicture.asset("assets/images/Theme.svg"),
+          child: SvgPicture.asset("assets/images/$themeButton"),
         )
       ],
     );
@@ -32,7 +37,10 @@ class CustomAppBar extends StatelessWidget {
 class LogoWidget extends StatelessWidget {
   const LogoWidget({
     super.key,
+    required this.iconColor,
   });
+
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +48,11 @@ class LogoWidget extends StatelessWidget {
       builder: (BuildContext context, WidgetRef ref, Widget? child) => Text(
         "WalkMate",
         style: TextStyle(
-          fontFamily: "PlusJakartaSans",
-          fontSize: 24,
-          fontWeight: FontWeight.w700,
-          // change the color according to the theme.
-          color: ref.watch(themeProvider).isDarkMode
-              ? Kconstants.of(context)!.offWhite
-              : Kconstants.of(context)!.green,
-        ),
+            fontFamily: "PlusJakartaSans",
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            // change the color according to the theme.
+            color: iconColor),
       ),
     );
   }
