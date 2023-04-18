@@ -31,7 +31,7 @@ class _HomeScreensState extends ConsumerState<HomeScreens> {
               iconColor: Kconstants.of(context)!.green,
             ),
           ),
-          SizedBox(height: size.height * 0.04),
+          SizedBox(height: size.height * 0.06),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(

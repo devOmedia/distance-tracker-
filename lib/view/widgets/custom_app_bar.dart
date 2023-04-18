@@ -8,12 +8,14 @@ class CustomAppBar extends StatelessWidget {
     super.key,
     required this.ref,
     required this.iconColor,
-    this.themeButton = "Theme.svg",
+    this.isWhiteBackground = true,
   });
 
   final WidgetRef ref;
   final Color iconColor;
-  final String themeButton;
+
+  final bool
+      isWhiteBackground; // use this variable to handle the different theme icon
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,11 @@ class CustomAppBar extends StatelessWidget {
           onTap: () {
             ref.read(themeProvider).toggleTheme();
           },
-          child: SvgPicture.asset("assets/images/$themeButton"),
+          child: isWhiteBackground
+              ? SvgPicture.asset("assets/images/Theme.svg")
+              : ref.watch(themeProvider).isDarkMode
+                  ? SvgPicture.asset("assets/images/light_theme.svg")
+                  : SvgPicture.asset("assets/images/dark_theme.svg"),
         )
       ],
     );

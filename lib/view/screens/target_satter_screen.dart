@@ -38,10 +38,10 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                 CustomAppBar(
                   ref: ref,
                   iconColor: Kconstants.of(context)!.offWhite,
-                  themeButton: "dark_theme.svg",
+                  isWhiteBackground: false,
                 ),
                 //==================================>>
-                SizedBox(height: size.height * 0.04),
+                SizedBox(height: size.height * 0.06),
                 Text(
                   "Set Your Walking Goal Now!",
                   style: Kconstants.of(context)!.header.copyWith(
