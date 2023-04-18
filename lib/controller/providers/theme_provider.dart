@@ -9,11 +9,13 @@ class CustomThemes {
   //-------------DARK THEME SETTINGS
   getDarkTheme() => ThemeData(
         scaffoldBackgroundColor: Kconstants.of(context)!.black,
+        fontFamily: "Manrope",
       );
 
   //-------------light THEME SETTINGS
   getLightTheme() => ThemeData(
         scaffoldBackgroundColor: Kconstants.of(context)!.offWhite,
+        fontFamily: "Manrope",
       );
 }
 
@@ -30,7 +32,6 @@ class ThemeNotifier extends ChangeNotifier {
   void toggleTheme() {
     isOn = !isOn;
     themeMode = isOn ? ThemeMode.light : ThemeMode.dark;
-
     notifyListeners();
   }
 }
