@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
-import 'package:walkmate/view/screens/widgets/custom_app_bar.dart';
-import 'package:walkmate/view/screens/widgets/custom_button.dart';
+import 'package:walkmate/view/screens/target_satter_screen.dart';
+import 'package:walkmate/view/widgets/custom_app_bar.dart';
+import 'package:walkmate/view/widgets/custom_button.dart';
+import 'package:walkmate/view/widgets/navigator_extension.dart';
 
 class HomeScreens extends ConsumerStatefulWidget {
   const HomeScreens({super.key});
@@ -65,7 +67,9 @@ class _HomeScreensState extends ConsumerState<HomeScreens> {
                   child: CustomButtonWidget(
                     size: size,
                     title: "Get Started",
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push(const TargetSatterScreen());
+                    },
                   ),
                 )
               ],
