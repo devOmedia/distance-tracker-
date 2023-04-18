@@ -27,7 +27,7 @@ class Kconstants extends InheritedWidget {
   );
 
   final EdgeInsetsGeometry appPading =
-      const EdgeInsets.only(top: 32, left: 16, right: 16);
+      const EdgeInsets.only(top: 52, left: 24, right: 24);
 
   @override
   bool updateShouldNotify(Kconstants oldWidget) => false;

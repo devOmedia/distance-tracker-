@@ -15,11 +15,13 @@ class TargetSatterScreen extends ConsumerStatefulWidget {
 class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
   @override
   Widget build(BuildContext context) {
+    final Kconst = Kconstants.of(context);
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
         children: [
           //top green portion
-          Expanded(
+          Flexible(
               child: Container(
             padding: Kconstants.of(context)!.appPading,
             decoration: BoxDecoration(
@@ -32,15 +34,39 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                // ==================================>>  custom app bar
                 CustomAppBar(
                   ref: ref,
                   iconColor: Kconstants.of(context)!.offWhite,
                   themeButton: "dark_theme.svg",
                 ),
+                //==================================>>
+                SizedBox(height: size.height * 0.04),
+                Text(
+                  "Set Your Walking Goal Now!",
+                  style: Kconstants.of(context)!.header.copyWith(
+                        color: Kconstants.of(context)!.offWhite,
+                        fontSize: size.width * 0.1,
+                      ),
+                ),
+                //===============================>>
+                SizedBox(height: size.height * 0.04),
+                Text(
+                  "Your determination and effort is inspiring. Keep pushing yourself to reach new heights.",
+                  maxLines: 3,
+                  style: Kconst!.subHeader.copyWith(
+                    color: Kconst.offWhite,
+                    wordSpacing: 1.5,
+                    fontSize: size.width * 0.035,
+                  ),
+                ),
+                SizedBox(height: size.height * 0.04),
               ],
             ),
           )),
-          Expanded(child: Container()),
+          Expanded(
+            child: Container(),
+          ),
         ],
       ),
     );

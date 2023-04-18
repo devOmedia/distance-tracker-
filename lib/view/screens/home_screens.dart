@@ -33,7 +33,7 @@ class _HomeScreensState extends ConsumerState<HomeScreens> {
           ),
           SizedBox(height: size.height * 0.04),
           Padding(
-            padding: Kconstants.of(context)!.appPading,
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: Text(
               "Set your walking goal today!",
               style: Kconstants.of(context)!.header.copyWith(
@@ -65,8 +65,8 @@ class _HomeScreensState extends ConsumerState<HomeScreens> {
                       ),
                 Positioned(
                   bottom: 30,
-                  left: 16,
-                  right: 16,
+                  left: 24,
+                  right: 24,
                   child: CustomButtonWidget(
                     size: size,
                     title: "Get Started",
