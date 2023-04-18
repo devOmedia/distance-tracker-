@@ -4,7 +4,7 @@ class Kconstants extends InheritedWidget {
   static Kconstants? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<Kconstants>();
 
-  const Kconstants({required Widget child, required Key key})
+  const Kconstants({Key? key, required Widget child})
       : super(key: key, child: child);
 
   final String successMessage = 'Some message';
@@ -14,6 +14,17 @@ class Kconstants extends InheritedWidget {
   final Color offWhite = const Color(0xffEDF1F5);
   final Color lightBlack = const Color(0xffEDF1F5);
   final Color white = const Color(0XFFFFFFFF);
+
+  //========================================>> text style
+  final TextStyle header = const TextStyle(
+    fontFamily: "PlusJakartaSans",
+    fontWeight: FontWeight.w700,
+  );
+
+  final TextStyle subHeader = const TextStyle(
+    fontFamily: "Manrope",
+    fontWeight: FontWeight.w600,
+  );
 
   @override
   bool updateShouldNotify(Kconstants oldWidget) => false;
