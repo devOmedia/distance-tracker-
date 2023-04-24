@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
+import 'package:walkmate/view/screens/checkpoint_screen.dart';
 import 'package:walkmate/view/widgets/custom_app_bar.dart';
 import 'package:walkmate/view/widgets/custom_button.dart';
+import 'package:walkmate/view/widgets/navigator_extension.dart';
 
 class TargetSatterScreen extends ConsumerStatefulWidget {
   const TargetSatterScreen({super.key});
@@ -101,6 +103,16 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                               "target": sliderValue,
                               "time": Timestamp.now(),
                             });
+
+                            final snackBar = SnackBar(
+                              content: const Text('You have set your limit.'),
+                              backgroundColor: Kconst.green,
+                            );
+
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+
+                            context.pushReplacement(const CheckPointScreen());
                           },
                           title: "Set Limit",
                         ),
@@ -135,7 +147,7 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                         fontSize: size.width * 0.035,
                         color: themePro.isDarkMode
                             ? Kconst.offWhite
-                            : Kconst.black,
+                            : Kconst.green,
                       ),
                     ),
                   ),
