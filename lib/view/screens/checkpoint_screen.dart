@@ -5,8 +5,7 @@ import 'package:walkmate/view/widgets/custom_app_bar.dart';
 import 'package:walkmate/view/widgets/sliderVerticalWidget.dart';
 
 class CheckPointScreen extends ConsumerStatefulWidget {
-  const CheckPointScreen({super.key, required this.target});
-  final double target;
+  const CheckPointScreen({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -42,10 +41,7 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
                   Row(
                     children: [
                       //====================================>>> slider
-                      SliderVerticalWidget(
-                        size: size,
-                        target: widget.target,
-                      ),
+                      SliderVerticalWidget(size: size),
                     ],
                   )
                 ],

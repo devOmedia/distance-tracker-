@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:walkmate/controller/providers/target_provider.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
 import 'package:walkmate/view/screens/checkpoint_screen.dart';
@@ -53,7 +54,7 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                 Slider(
                   activeColor: Kconst.green,
                   label: sliderValue.round().toString(),
-                  divisions: 100,
+                  divisions: 10,
                   min: 0,
                   max: 1000,
                   value: sliderValue,
@@ -104,6 +105,7 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                               "time": Timestamp.now(),
                               "isComplete": false,
                             });
+                            // show snack bar
 
                             final snackBar = SnackBar(
                               content: const Text('You have set your limit.'),
@@ -113,10 +115,12 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
 
+                            // store the target value to the provider.
+                            ref.read(targetProvider).setTarget(sliderValue);
+
+                            //navigate to the next screen
                             context.pushReplacement(
-                              CheckPointScreen(
-                                target: sliderValue,
-                              ),
+                              const CheckPointScreen(),
                             );
                           },
                           title: "Set Limit",

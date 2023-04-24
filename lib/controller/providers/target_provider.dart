@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TargetNotifier extends ChangeNotifier {
-  int target = 0;
-  final List<int> checkPoints = [];
+  double target = 100;
+  final List<double> checkPoints = [];
+  double completedLimit = 0;
 
 //set target
-  setTarget(int value) {
+  setTarget(double value) {
     target = value;
     notifyListeners();
   }
 
 //add checkpoint values.
-  addCheckPint(int value) {
+  addCheckPint(double value) {
     checkPoints.add(value);
+//calculate the total limit.
+    if (checkPoints.isNotEmpty) {
+      for (int i = 0; i < checkPoints.length; i++) {
+        completedLimit = checkPoints[i];
+      }
+    }
     notifyListeners();
   }
 
@@ -22,3 +30,7 @@ class TargetNotifier extends ChangeNotifier {
     checkPoints.clear();
   }
 }
+
+final targetProvider = ChangeNotifierProvider<TargetNotifier>((ref) {
+  return TargetNotifier();
+});

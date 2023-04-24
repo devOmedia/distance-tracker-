@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:walkmate/controller/providers/target_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
 
-class SliderVerticalWidget extends StatefulWidget {
-  const SliderVerticalWidget(
-      {super.key, required this.size, required this.target});
+class SliderVerticalWidget extends ConsumerStatefulWidget {
+  const SliderVerticalWidget({super.key, required this.size});
   final Size size;
-  final double target;
 
   @override
-  _SliderVerticalWidgetState createState() => _SliderVerticalWidgetState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _SliderVerticalWidgetState();
 }
 
-class _SliderVerticalWidgetState extends State<SliderVerticalWidget> {
+class _SliderVerticalWidgetState extends ConsumerState<SliderVerticalWidget> {
   double value = 0;
 
   @override
   Widget build(BuildContext context) {
     const double min = 0;
-    double max = widget.target;
+    double max = ref.watch(targetProvider).target;
     final size = widget.size;
     final Kconst = Kconstants.of(context);
 
@@ -45,7 +46,10 @@ class _SliderVerticalWidgetState extends State<SliderVerticalWidget> {
               divisions: 10,
               activeColor: Kconst!.offWhite,
               label: value.round().toString(),
-              onChanged: (value) => setState(() => this.value = value),
+              onChanged: (value) {
+                // setState(() => this.value = value);
+                ref.read(targetProvider).addCheckPint(value);
+              },
             ),
           ),
         ],
