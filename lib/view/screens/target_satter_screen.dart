@@ -16,6 +16,8 @@ class TargetSatterScreen extends ConsumerStatefulWidget {
 
 class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
   double sliderValue = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final Kconst = Kconstants.of(context);
@@ -34,6 +36,14 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                   "Add your target".toUpperCase(),
                   style: Kconst!.subHeader.copyWith(
                     color: themePro.isDarkMode ? Kconst.offWhite : Kconst.black,
+                  ),
+                ),
+                //==========================>>> target text
+                Text(
+                  sliderValue.round().toString(),
+                  style: Kconst.subHeader.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: themePro.isDarkMode ? Kconst.green : Kconst.black,
                   ),
                 ),
                 SizedBox(height: size.height * 0.03),
@@ -87,7 +97,15 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                         ),
                       )
                     : GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          //warning snackbar.
+                          const snackBar = SnackBar(
+                            content: Text('Please set a limit first'),
+                            backgroundColor: Colors.redAccent,
+                          );
+
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        },
                         child: disableButton(size, Kconst, themePro),
                       ), // disable button.
 
