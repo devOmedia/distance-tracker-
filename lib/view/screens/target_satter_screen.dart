@@ -102,6 +102,7 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                                 .add({
                               "target": sliderValue,
                               "time": Timestamp.now(),
+                              "isComplete": false,
                             });
 
                             final snackBar = SnackBar(
@@ -112,7 +113,11 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
 
-                            context.pushReplacement(const CheckPointScreen());
+                            context.pushReplacement(
+                              CheckPointScreen(
+                                target: sliderValue,
+                              ),
+                            );
                           },
                           title: "Set Limit",
                         ),
