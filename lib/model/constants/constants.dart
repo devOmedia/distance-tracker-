@@ -26,7 +26,7 @@ class Kconstants extends InheritedWidget {
     fontWeight: FontWeight.w600,
   );
 
-  final EdgeInsetsGeometry appPading =
+  final EdgeInsetsGeometry appPadding =
       const EdgeInsets.only(top: 52, left: 24, right: 24);
 
   @override

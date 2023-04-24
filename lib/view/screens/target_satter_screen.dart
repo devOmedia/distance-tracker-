@@ -186,7 +186,7 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
   Flexible topCardWidget(BuildContext context, Size size, Kconstants? Kconst) {
     return Flexible(
         child: Container(
-      padding: Kconstants.of(context)!.appPading,
+      padding: Kconstants.of(context)!.appPadding,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(24),
