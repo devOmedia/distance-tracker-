@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
@@ -40,7 +41,7 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                 ),
                 //==========================>>> target text
                 Text(
-                  sliderValue.round().toString(),
+                  "${sliderValue.round()} m",
                   style: Kconst.subHeader.copyWith(
                     fontWeight: FontWeight.bold,
                     color: themePro.isDarkMode ? Kconst.green : Kconst.black,
@@ -92,7 +93,15 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                         child: CustomButtonWidget(
                           size: size,
-                          onPressed: () {},
+                          onPressed: () {
+                            //add data to the fire store.
+                            FirebaseFirestore.instance
+                                .collection("targets")
+                                .add({
+                              "target": sliderValue,
+                              "time": Timestamp.now(),
+                            });
+                          },
                           title: "Set Limit",
                         ),
                       )
