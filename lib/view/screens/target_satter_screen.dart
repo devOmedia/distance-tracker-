@@ -73,7 +73,7 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),

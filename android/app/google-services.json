@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "873716184789",
+    "project_id": "amadia-walkmate",
+    "storage_bucket": "amadia-walkmate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873716184789:android:e16d48396938b3af5c545c",
+        "android_client_info": {
+          "package_name": "com.example.walkmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873716184789-m6oo4v156tqngf6crc5f5g8cvnm5spa4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg934DqNIRLWnqTLZhv1nMLFfvByKbCMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873716184789-m6oo4v156tqngf6crc5f5g8cvnm5spa4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

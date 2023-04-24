@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>873716184789-tqeamv7hf5a2h8lr6vj28b4883cvm1p5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.873716184789-tqeamv7hf5a2h8lr6vj28b4883cvm1p5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBQk-oLus5t02dzkPqQ2rl01NnMhEgvjMg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>873716184789</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.walkmate</string>
+	<key>PROJECT_ID</key>
+	<string>amadia-walkmate</string>
+	<key>STORAGE_BUCKET</key>
+	<string>amadia-walkmate.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:873716184789:ios:b38cd0c5524223205c545c</string>
+</dict>
+</plist>
