@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
 import 'package:walkmate/view/widgets/custom_app_bar.dart';
+import 'package:walkmate/view/widgets/custom_button.dart';
 
 class TargetSatterScreen extends ConsumerStatefulWidget {
   const TargetSatterScreen({super.key});
@@ -64,7 +65,7 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                         ),
                       ),
                       Text(
-                        "1000m",
+                        "10000m",
                         style: Kconst.subHeader.copyWith(
                           color: themePro.isDarkMode
                               ? Kconst.offWhite
@@ -74,10 +75,71 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                     ],
                   ),
                 ),
+                SizedBox(height: size.height * 0.08),
+                //=======================================>>> set limit button.
+                sliderValue != 0
+                    ? Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: CustomButtonWidget(
+                          size: size,
+                          onPressed: () {},
+                          title: "Set Limit",
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: () {},
+                        child: disableButton(size, Kconst, themePro),
+                      ), // disable button.
+
+                //===================================>> >history button
+                SizedBox(height: size.height * 0.02),
+                Container(
+                  height: size.height * 0.08,
+                  width: size.width - 32,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    border: Border.all(color: Kconst.green),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'History',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: size.width * 0.035,
+                        color: themePro.isDarkMode
+                            ? Kconst.offWhite
+                            : Kconst.black,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Container disableButton(
+      Size size, Kconstants Kconst, ThemeNotifier themePro) {
+    return Container(
+      height: size.height * 0.08,
+      width: size.width - 32,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(32),
+        color: const Color(0xffD3D3D3),
+        // /  border: Border.all(color: Kconst.green),
+      ),
+      child: Center(
+        child: Text(
+          'Set Limit',
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: size.width * 0.035,
+            color: Kconst.black,
+          ),
+        ),
       ),
     );
   }
