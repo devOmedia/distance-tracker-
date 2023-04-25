@@ -31,6 +31,7 @@ class CustomButtonWidget extends StatelessWidget {
               color: Kconstants.of(context)!.offWhite,
               fontWeight: FontWeight.w600,
               fontSize: size.width * 0.035,
+              letterSpacing: 1.5,
             ),
           ),
         ),

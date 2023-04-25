@@ -47,7 +47,7 @@ class _SliderVerticalWidgetState extends ConsumerState<SliderVerticalWidget> {
               activeColor: Kconst!.offWhite,
               label: value.round().toString(),
               onChanged: (value) {
-                // setState(() => this.value = value);
+                setState(() => this.value = value);
                 ref.read(targetProvider).addCheckPint(value);
               },
             ),

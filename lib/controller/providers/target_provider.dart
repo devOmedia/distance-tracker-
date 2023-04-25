@@ -15,7 +15,7 @@ class TargetNotifier extends ChangeNotifier {
 //add checkpoint values.
   addCheckPint(double value) {
     checkPoints.add(value);
-//calculate the total limit.
+//calculate the total limit.s
     if (checkPoints.isNotEmpty) {
       for (int i = 0; i < checkPoints.length; i++) {
         completedLimit = checkPoints[i];
