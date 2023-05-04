@@ -4,7 +4,6 @@ import 'package:walkmate/controller/providers/target_provider.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
 import 'package:walkmate/view/widgets/custom_app_bar.dart';
-import 'package:walkmate/view/widgets/custom_button.dart';
 import 'package:walkmate/view/widgets/sliderVerticalWidget.dart';
 
 class CheckPointScreen extends ConsumerStatefulWidget {
@@ -98,34 +97,38 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: size.height * 0.04),
-                  Text(
-                    "Checkpoints".toUpperCase(),
-                    style: Kconst!.subHeader.copyWith(
-                      letterSpacing: 1.5,
-                      color:
-                          themePro.isDarkMode ? Kconst.offWhite : Kconst.black,
-                    ),
-                  ),
+                  // Text(
+                  //   "Checkpoints".toUpperCase(),
+                  //   style: Kconst!.subHeader.copyWith(
+                  //     letterSpacing: 1.5,
+                  //     color:
+                  //         themePro.isDarkMode ? Kconst.offWhite : Kconst.black,
+                  //   ),
+                  // ),
                   //========================================>>> checkpoint
-                  ListView.builder(
-                      itemCount: ref.watch(targetProvider).checkPoints.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: Icon(
-                            Icons.flag,
-                            color: Kconst.green,
-                          ),
-                        );
-                      }),
-                  SizedBox(height: size.height * 0.02),
-                  CustomButtonWidget(
-                    size: size,
-                    onPressed: () {
-                      ref.read(targetProvider).addCheckPint(1);
-                    },
-                    title: "Add Checkpoint",
-                  ),
+                  // ListView.builder(
+                  //     itemCount: ref.watch(targetProvider).checkPoints.length,
+                  //     shrinkWrap: true,
+                  //     itemBuilder: (context, index) {
+                  //       return ListTile(
+                  //         leading: Icon(
+                  //           Icons.flag,
+                  //           color: Kconst.green,
+                  //         ),
+                  //         title: Text(ref
+                  //             .watch(targetProvider)
+                  //             .checkPoints[index]
+                  //             .toString()),
+                  //       );
+                  //     }),
+                  // SizedBox(height: size.height * 0.02),
+                  // CustomButtonWidget(
+                  //   size: size,
+                  //   onPressed: () {
+                  //     ref.read(targetProvider).addCheckPint(1);
+                  //   },
+                  //   title: "Add Checkpoint",
+                  // ),
                   //=======================================>>> mark as completed button.
                   SizedBox(height: size.height * 0.02),
                   Container(
@@ -133,7 +136,7 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
                     width: size.width - 32,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(32),
-                      border: Border.all(color: Kconst.green),
+                      border: Border.all(color: Kconst!.green),
                     ),
                     child: Center(
                       child: Text(
