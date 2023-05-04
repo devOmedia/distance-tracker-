@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:walkmate/controller/providers/target_provider.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
@@ -15,6 +16,8 @@ class CheckPointScreen extends ConsumerStatefulWidget {
 }
 
 class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
+  late GoogleMapController mapController;
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -22,6 +25,7 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
     final themePro = ref.watch(themeProvider);
     return Scaffold(
       body: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           Flexible(
             child: Container(
@@ -31,7 +35,7 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
                   bottomLeft: Radius.circular(24),
                   bottomRight: Radius.circular(24),
                 ),
-                color: Kconstants.of(context)!.green,
+                color: Colors.purple.shade300, //Kconstants.of(context)!.green,
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -90,69 +94,31 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
               ),
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: size.height * 0.04),
-                  // Text(
-                  //   "Checkpoints".toUpperCase(),
-                  //   style: Kconst!.subHeader.copyWith(
-                  //     letterSpacing: 1.5,
-                  //     color:
-                  //         themePro.isDarkMode ? Kconst.offWhite : Kconst.black,
-                  //   ),
-                  // ),
-                  //========================================>>> checkpoint
-                  // ListView.builder(
-                  //     itemCount: ref.watch(targetProvider).checkPoints.length,
-                  //     shrinkWrap: true,
-                  //     itemBuilder: (context, index) {
-                  //       return ListTile(
-                  //         leading: Icon(
-                  //           Icons.flag,
-                  //           color: Kconst.green,
-                  //         ),
-                  //         title: Text(ref
-                  //             .watch(targetProvider)
-                  //             .checkPoints[index]
-                  //             .toString()),
-                  //       );
-                  //     }),
-                  // SizedBox(height: size.height * 0.02),
-                  // CustomButtonWidget(
-                  //   size: size,
-                  //   onPressed: () {
-                  //     ref.read(targetProvider).addCheckPint(1);
-                  //   },
-                  //   title: "Add Checkpoint",
-                  // ),
-                  //=======================================>>> mark as completed button.
-                  SizedBox(height: size.height * 0.02),
-                  Container(
-                    height: size.height * 0.08,
-                    width: size.width - 32,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(32),
-                      border: Border.all(color: Kconst!.green),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Mark As Completed',
-                        style: TextStyle(
-                          letterSpacing: 1.5,
-                          fontWeight: FontWeight.w600,
-                          fontSize: size.width * 0.035,
-                          color: themePro.isDarkMode
-                              ? Kconst.offWhite
-                              : Kconst.green,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+          const Expanded(
+            child: GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: LatLng(22.7010, 90.3535),
+                zoom: 18.5,
+              ),
+            ),
+          ),
+          SizedBox(height: size.height * 0.02),
+          Container(
+            height: size.height * 0.08,
+            width: size.width - 42,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(32),
+              border: Border.all(color: Kconst!.green),
+            ),
+            child: Center(
+              child: Text(
+                'Mark As Completed',
+                style: TextStyle(
+                  letterSpacing: 1.5,
+                  fontWeight: FontWeight.w600,
+                  fontSize: size.width * 0.035,
+                  color: themePro.isDarkMode ? Kconst.offWhite : Kconst.green,
+                ),
               ),
             ),
           ),
