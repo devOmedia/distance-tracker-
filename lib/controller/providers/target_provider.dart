@@ -5,10 +5,16 @@ class TargetNotifier extends ChangeNotifier {
   double target = 100;
   final List<double> checkPoints = [];
   double completedLimit = 0;
+  double limit = 0;
 
 //set target
   setTarget(double value) {
     target = value;
+    notifyListeners();
+  }
+
+  setLimit(double value) {
+    limit = value;
     notifyListeners();
   }
 

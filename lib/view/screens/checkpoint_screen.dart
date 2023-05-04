@@ -107,10 +107,23 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
                     ),
                   ),
                   //========================================>>> checkpoint
+                  ListView.builder(
+                      itemCount: ref.watch(targetProvider).checkPoints.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Icon(
+                            Icons.flag,
+                            color: Kconst.green,
+                          ),
+                        );
+                      }),
                   SizedBox(height: size.height * 0.02),
                   CustomButtonWidget(
                     size: size,
-                    onPressed: () {},
+                    onPressed: () {
+                      ref.read(targetProvider).addCheckPint(1);
+                    },
                     title: "Add Checkpoint",
                   ),
                   //=======================================>>> mark as completed button.
