@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:walkmate/controller/providers/target_provider.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
@@ -17,6 +18,32 @@ class CheckPointScreen extends ConsumerStatefulWidget {
 
 class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
   late GoogleMapController mapController;
+  bool _isMapLoading = true;
+  LatLng? _currentPosition;
+
+  //get  the current locations
+  _getCurrentLocation() async {
+    LocationPermission permission;
+    permission = await Geolocator.requestPermission();
+
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double lat = position.latitude;
+    double long = position.longitude;
+
+    LatLng location = LatLng(lat, long);
+
+    setState(() {
+      _currentPosition = location;
+      _isMapLoading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    _getCurrentLocation();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,13 +121,24 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
               ),
             ),
           ),
-          const Expanded(
-            child: GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: LatLng(22.7010, 90.3535),
-                zoom: 18.5,
-              ),
-            ),
+          //================================>> google map
+          Expanded(
+            child: _isMapLoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : GoogleMap(
+                    initialCameraPosition: CameraPosition(
+                      target: _currentPosition!,
+                      zoom: 18.5,
+                    ),
+                    markers: {
+                      Marker(
+                        markerId: const MarkerId("current"),
+                        position: _currentPosition!,
+                      ),
+                    },
+                  ),
           ),
           SizedBox(height: size.height * 0.02),
           Container(
