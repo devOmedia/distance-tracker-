@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:walkmate/controller/providers/locations_provider.dart';
 import 'package:walkmate/controller/providers/target_provider.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
@@ -117,6 +118,8 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
 
                             // store the target value to the provider.
                             ref.read(targetProvider).setTarget(sliderValue);
+                            //store the stating locations.
+                            ref.read(LocationProvider).setStartLocation();
 
                             //navigate to the next screen
                             context.pushReplacement(
@@ -126,6 +129,7 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                           title: "Set Limit",
                         ),
                       )
+                    //======================>>> disable button
                     : GestureDetector(
                         onTap: () {
                           //warning snackbar.

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:walkmate/controller/providers/locations_provider.dart';
 import 'package:walkmate/controller/providers/target_provider.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
@@ -136,6 +137,10 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
                       Marker(
                         markerId: const MarkerId("current"),
                         position: _currentPosition!,
+                      ),
+                      Marker(
+                        markerId: const MarkerId("starting location"),
+                        position: ref.watch(LocationProvider).startLocation!,
                       ),
                     },
                   ),
