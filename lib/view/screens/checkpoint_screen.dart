@@ -1,6 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:walkmate/controller/providers/locations_provider.dart';
 import 'package:walkmate/controller/providers/target_provider.dart';
@@ -8,6 +9,7 @@ import 'package:walkmate/controller/providers/theme_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
 import 'package:walkmate/view/widgets/custom_app_bar.dart';
 import 'package:walkmate/view/widgets/sliderVerticalWidget.dart';
+import 'package:location/location.dart';
 
 class CheckPointScreen extends ConsumerStatefulWidget {
   const CheckPointScreen({super.key});
@@ -20,29 +22,44 @@ class CheckPointScreen extends ConsumerStatefulWidget {
 class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
   late GoogleMapController mapController;
   bool _isMapLoading = true;
-  LatLng? _currentPosition;
+  LocationData? _currentLocation;
+  final Completer<GoogleMapController> _controller = Completer();
 
   //get  the current locations
-  _getCurrentLocation() async {
-    LocationPermission permission;
-    permission = await Geolocator.requestPermission();
+  void getCurrentLocation() async {
+    // //get the permission
+    // geo.LocationPermission permission;
+    // permission = await geo.Geolocator.requestPermission();
 
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    double lat = position.latitude;
-    double long = position.longitude;
+    //get the locations
+    Location location = Location();
 
-    LatLng location = LatLng(lat, long);
+    location.getLocation().then((location) {
+      _currentLocation = location;
+    });
+    GoogleMapController googleMapController = await _controller.future;
 
-    setState(() {
-      _currentPosition = location;
-      _isMapLoading = false;
+    //set the current location on location change .
+    location.onLocationChanged.listen((event) {
+      _currentLocation = event;
+      _isMapLoading = false; // stop the loading
+
+      googleMapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+            zoom: 13.5,
+            target: LatLng(event.latitude!, event.longitude!),
+          ),
+        ),
+      );
+
+      setState(() {});
     });
   }
 
   @override
   void initState() {
-    _getCurrentLocation();
+    getCurrentLocation();
     super.initState();
   }
 
@@ -130,18 +147,25 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
                   )
                 : GoogleMap(
                     initialCameraPosition: CameraPosition(
-                      target: _currentPosition!,
-                      zoom: 18.5,
+                      target: LatLng(
+                        _currentLocation!.latitude!,
+                        _currentLocation!.longitude!,
+                      ),
+                      zoom: 13.5,
                     ),
                     markers: {
                       Marker(
                         markerId: const MarkerId("current"),
-                        position: _currentPosition!,
+                        position: LatLng(
+                          _currentLocation!.latitude!,
+                          _currentLocation!.longitude!,
+                        ),
                       ),
-                      Marker(
-                        markerId: const MarkerId("starting location"),
-                        position: ref.watch(LocationProvider).startLocation!,
-                      ),
+                      if (ref.watch(LocationProvider).startLocation != null)
+                        Marker(
+                          markerId: const MarkerId("starting location"),
+                          position: ref.watch(LocationProvider).startLocation!,
+                        ),
                     },
                   ),
           ),

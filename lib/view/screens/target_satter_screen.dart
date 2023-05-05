@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -97,7 +99,7 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                         padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                         child: CustomButtonWidget(
                           size: size,
-                          onPressed: () {
+                          onPressed: () async {
                             //add data to the fire store.
                             FirebaseFirestore.instance
                                 .collection("targets")
@@ -119,7 +121,7 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                             // store the target value to the provider.
                             ref.read(targetProvider).setTarget(sliderValue);
                             //store the stating locations.
-                            ref.read(LocationProvider).setStartLocation();
+                            await ref.read(LocationProvider).setStartLocation();
 
                             //navigate to the next screen
                             context.pushReplacement(
