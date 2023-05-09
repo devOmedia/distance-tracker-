@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:walkmate/firebase_options.dart';
 import 'package:walkmate/model/constants/constants.dart';
 import 'package:walkmate/view/screens/home_screens.dart';
-
 import 'controller/providers/theme_provider.dart';
 
 void main() async {

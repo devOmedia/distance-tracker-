@@ -1,9 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:walkmate/controller/providers/locations_provider.dart';
 import 'package:walkmate/controller/providers/target_provider.dart';
 import 'package:walkmate/controller/providers/theme_provider.dart';
 import 'package:walkmate/model/constants/constants.dart';
@@ -24,6 +22,12 @@ class TargetSatterScreen extends ConsumerStatefulWidget {
 class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
   double sliderValue = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,13 +105,13 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
                           size: size,
                           onPressed: () async {
                             //add data to the fire store.
-                            FirebaseFirestore.instance
-                                .collection("targets")
-                                .add({
-                              "target": sliderValue,
-                              "time": Timestamp.now(),
-                              "isComplete": false,
-                            });
+                            // FirebaseFirestore.instance
+                            //     .collection("targets")
+                            //     .add({
+                            //   "target": sliderValue,
+                            //   "time": Timestamp.now(),
+                            //   "isComplete": false,
+                            // });
                             // show snack bar
 
                             final snackBar = SnackBar(
@@ -120,8 +124,8 @@ class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
 
                             // store the target value to the provider.
                             ref.read(targetProvider).setTarget(sliderValue);
-                            //store the stating locations.
-                            await ref.read(LocationProvider).setStartLocation();
+                            //store the start locations
+                            //ref.read(LocationProvider).setStartLocation();
 
                             //navigate to the next screen
                             context.pushReplacement(

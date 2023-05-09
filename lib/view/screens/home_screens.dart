@@ -6,6 +6,7 @@ import 'package:walkmate/view/screens/target_satter_screen.dart';
 import 'package:walkmate/view/widgets/custom_app_bar.dart';
 import 'package:walkmate/view/widgets/custom_button.dart';
 import 'package:walkmate/view/widgets/navigator_extension.dart';
+import '../../controller/providers/locations_provider.dart';
 
 class HomeScreens extends ConsumerStatefulWidget {
   const HomeScreens({super.key});
@@ -16,6 +17,16 @@ class HomeScreens extends ConsumerStatefulWidget {
 }
 
 class _HomeScreensState extends ConsumerState<HomeScreens> {
+  _getTheStartLocation() async {
+    await ref.read(LocationProvider).setStartLocation();
+  }
+
+  @override
+  void initState() {
+    _getTheStartLocation();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
