@@ -21,7 +21,7 @@ class TargetSatterScreen extends ConsumerStatefulWidget {
 
 class _TargetSatterScreenState extends ConsumerState<TargetSatterScreen> {
   double sliderValue = 0;
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  //final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {

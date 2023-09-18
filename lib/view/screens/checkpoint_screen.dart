@@ -1,4 +1,5 @@
-import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,7 +24,7 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
   late GoogleMapController mapController;
   bool _isMapLoading = true;
   LocationData? _currentLocation;
-  final Completer<GoogleMapController> _controller = Completer();
+  //final Completer<GoogleMapController> _controller = Completer();
 
   //get  the current locations
   void getCurrentLocation() async {
@@ -37,29 +38,33 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
     location.getLocation().then((location) {
       _currentLocation = location;
     });
-    GoogleMapController googleMapController = await _controller.future;
+    //GoogleMapController googleMapController = await _controller.future;
 
     //set the current location on location change .
-    location.onLocationChanged.listen((event) {
-      _currentLocation = event;
-      _isMapLoading = false; // stop the loading
+    // location.onLocationChanged.listen((event) {
+    //   _currentLocation = event;
+    //   _isMapLoading = false; // stop the loading
+    //
+    //   googleMapController.animateCamera(
+    //     CameraUpdate.newCameraPosition(
+    //       CameraPosition(
+    //         zoom: 13.5,
+    //         target: LatLng(event.latitude!, event.longitude!),
+    //       ),
+    //     ),
+    //   );
+    //
+    //   setState(() {});
+    // });
 
-      googleMapController.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(
-            zoom: 13.5,
-            target: LatLng(event.latitude!, event.longitude!),
-          ),
-        ),
-      );
-
-      setState(() {});
+    setState(() {
+      _isMapLoading = false;
     });
   }
 
   @override
   void initState() {
-    getCurrentLocation();
+   // getCurrentLocation();
     super.initState();
   }
 
@@ -72,6 +77,7 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
+          ///TOP SLIDER WIDGET
           Flexible(
             child: Container(
               padding: Kconstants.of(context)!.appPadding,
@@ -139,7 +145,7 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
               ),
             ),
           ),
-          //================================>> google map
+          ///================================>> google map
           Expanded(
             child: _isMapLoading
                 ? const Center(
@@ -170,21 +176,31 @@ class _CheckPointScreenState extends ConsumerState<CheckPointScreen> {
                   ),
           ),
           SizedBox(height: size.height * 0.02),
-          Container(
-            height: size.height * 0.08,
-            width: size.width - 42,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(32),
-              border: Border.all(color: Kconst!.green),
-            ),
-            child: Center(
-              child: Text(
-                'Mark As Completed',
-                style: TextStyle(
-                  letterSpacing: 1.5,
-                  fontWeight: FontWeight.w600,
-                  fontSize: size.width * 0.035,
-                  color: themePro.isDarkMode ? Kconst.offWhite : Kconst.green,
+          GestureDetector(
+            onTap: ref.watch(targetProvider).completedLimit.round() == ref.watch(targetProvider).target.round() ? () {
+                log("----------------------------------->>>>");
+    } : null,
+            child: Container(
+              height: size.height * 0.08,
+              width: size.width - 42,
+              decoration: BoxDecoration(
+                color: themePro.isDarkMode ? ref.watch(targetProvider).completedLimit.round()
+                    == ref.watch(targetProvider).target.round() ?
+                Kconst?.green : Kconst?.black : ref.watch(targetProvider).completedLimit.round()
+                    == ref.watch(targetProvider).target.round() ?
+                Kconst?.green : Kconst?.offWhite,
+                borderRadius: BorderRadius.circular(32),
+                border: Border.all(color: Kconst!.green),
+              ),
+              child: Center(
+                child: Text(
+                  'Mark As Completed',
+                  style: TextStyle(
+                    letterSpacing: 1.5,
+                    fontWeight: FontWeight.w600,
+                    fontSize: size.width * 0.035,
+                    color:  themePro.isDarkMode ? ref.watch(targetProvider).completedLimit.round() == ref.watch(targetProvider).target.round() ? Kconst?.black : Kconst?.green: Kconst.black,
+                  ),
                 ),
               ),
             ),

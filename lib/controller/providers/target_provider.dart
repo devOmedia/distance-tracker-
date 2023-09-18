@@ -10,7 +10,7 @@ class TargetNotifier extends ChangeNotifier {
 //set target
   setTarget(double value) {
     target = value;
-    notifyListeners();
+   // notifyListeners();
   }
 
   setLimit(double value) {
