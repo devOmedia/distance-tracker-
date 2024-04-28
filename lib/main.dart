@@ -26,10 +26,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //initialize the theme class.
+    //distance tracker
     final CustomThemes customThemes = CustomThemes(context);
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         return MaterialApp(
+          
           debugShowCheckedModeBanner: false,
           theme: customThemes.getLightTheme(),
           darkTheme: customThemes.getDarkTheme(),
